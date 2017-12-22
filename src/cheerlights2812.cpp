@@ -251,6 +251,10 @@ void messageReceived(char* topic, unsigned char* payload, unsigned int length) {
   str[6] = '\0';
   Serial.println(str);
   long val = strtol(str, NULL, 16); // base 16 (hex)
+ 
+  if (val == 0) {
+    return;  // discard bad color 00000 otherwise the neopixels go blank
+  }
 
   start = millis();
   randomEffect();
